@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Новости{% endblock %}
+{% block content %}
+
+{% if article %}
+    {% for a in article %}
+        <div class="bg-white mb-5 p-1 rounded-lg border">
+            <a><h3>{{ a.title }}</h3></a>
+            <img class="border rounded-lg" src="{{ a.img.url }}" style="width:100%; height:auto;"><br> <!---height="550px" width="1100px"--->
+            <a>{{ a.text| truncatechars:200 }}</a><br>
+            <a href="{% url 'article:detail' a.id %}"><button type="button" class="btn btn-success mt-2">Подробнее</button></a>
+        </div>
+    {% endfor %}
+{% else %}
+    <p class="font-italic text-black-50">Ого, ты спиздил все новости? Щас тоби пизда будит😡</p>
+{% endif %}
+
+{% endblock %}

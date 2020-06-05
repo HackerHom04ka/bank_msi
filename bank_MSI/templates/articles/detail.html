@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}{{ a.title }} | Новость{% endblock %}
+{% block content %}
+<div>
+    <a><h3>{{ a.title }}</h3></a>
+    <img class="border rounded-lg" src="{{ a.img.url }}" style="width:100%; height:auto;"><br> <!---height="550px" width="1100px"--->
+    <p>{{ a.text }}</p><br>
+    <p class="font-italic text-black-50 text-right">{{ a.pub_date }}</p>
+</div>
+<hr>
+<h4>Оставить комментарий</h4><br>
+<form action="{% url 'article:comment' a.id %}" method="POST">
+    {% csrf_token %}
+    <textarea class="form-control" placeholder="Напишите комментарий" required name="comment_text"></textarea><br>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+<script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
+<script type="text/javascript">
+  VK.init({apiId: 7499791});
+</script>
+
+<!-- VK Widget -->
+<div id="vk_auth"></div>
+<script type="text/javascript">
+  VK.Widgets.Auth("vk_auth", {"onAuth":function(data) {alert('user '+data['uid']+' authorized');}});
+</script>
+<hr>
+{% endblock %}

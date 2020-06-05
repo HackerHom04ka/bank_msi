@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}Гл. страница{% endblock %}
+{% block content %}
+<h1>Банк МСИ</h1>
+<a>Данный банк является РП проектом так, что если вы здесь случайно, то можите покидать, либо же познакомится с ММ (Мемным миром)</a>
+<div>
+    <big><big>Последние новости</big></big><a class="float-right" href="{% url 'article:index' %}">Все новости</a>
+    <div class="row justify-content-md-center">
+        {% if article %}
+            {% for a in article %}
+                <div class="col mb-5 p-1 bg-white rounded-lg border mx-1">
+                    <a><h3>{{ a.title }}</h3></a>
+                    <img class="border rounded-lg" src="{{ a.img.url }}" style="width:100%; height:auto;"><br>
+                    <a>{{ a.text }}</a><br>
+                    <a href="{% url 'article:detail' a.id %}"><button type="button" class="btn btn-success mt-2">Подробнее</button></a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="font-italic text-black-50">Ого, ты спиздил все новости? Щас тоби пизда будит😡</p>
+        {% endif %}
+    </div>
+</div>
+<div>
+    <big><big>Каталог</big></big><a class="float-right" href="{% url 'catalog:index' %}">Весь каталог</a>
+    <div class="row justify-content-md-center">
+        {% if catalog %}
+            {% for cat in catalog %}
+                <div class="col mb-5 p-1 bg-white rounded-lg border mx-1">
+                    <a><h3>{{ cat.title }}</h3></a>
+                    <img class="border rounded-lg" src="{{ cat.img.url }}" style="width:100%; height:auto;"><br>
+                    <a>{{ cat.text }}</a><br>
+                    <a href="{% url 'catalog:detail' cat.id %}"><button type="button" class="btn btn-success mt-2">Подробнее</button></a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="font-italic text-black-50">Ого, ты спиздил все продукты? Щас тоби пизда будит😡</p>
+        {% endif %}
+    </div>
+</div>
+<div>
+    <big><big>Страны</big></big><a class="float-right" href="{% url 'country:index' %}">Все страны</a>
+    <div class="row justify-content-md-center">
+            {% if country %}
+                {% for c in country %}
+                    <div class="col mb-5 p-1 bg-white rounded-lg border mx-1">
+                        <a><h3>{{ c.title }}</h3></a>
+                        <img class="border rounded-lg" src="{{ c.img.url }}" style="width:100%; height:auto;"><br>
+                        <a>{{ c.description }}</a><br>
+                        <a href="{% url 'country:detail' c.id %}"><button type="button" class="btn btn-success mt-2">Подробнее</button></a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="font-italic text-black-50">Ого, ты спиздил все страны? Щас тоби пизда будит😡</p>
+            {% endif %}
+    </div>
+</div>
+<div>
+    <big><big>Организации</big></big><a class="float-right" href="{% url 'orgs:index' %}">Все организации</a>
+    <div class="row justify-content-md-center">
+        {% if org %}
+                {% for o in org %}
+                    <div class="col mb-5 p-1 bg-white rounded-lg border mx-1">
+                        <a><h3>{{ o.title }}</h3></a>
+                        <img class="border rounded-lg" src="{{ o.img.url }}" style="width:100%; height:auto;"><br>
+                        <a>{{ o.description }}</a><br>
+                        <a href="{% url 'orgs:detail' org.id %}"><button type="button" class="btn btn-success mt-2">Подробнее</button></a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="font-italic text-black-50">Ого, ты спиздил все организации? Щас тоби пизда будит😡</p>
+            {% endif %}
+    </div>
+</div>
+{% endblock %}
